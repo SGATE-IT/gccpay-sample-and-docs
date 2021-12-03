@@ -1,0 +1,87 @@
+<html>
+<head>
+<title>Sgate.sa Payment case & sample</title>
+<style>
+#root {
+}
+
+#root .loading,
+#root .error,
+#root .success {
+  display: none;
+  box-sizing: border-box;
+  margin: 0;
+  color: rgba(0,0,0,.85);
+  font-size: 14px;
+  font-variant: tabular-nums;
+  line-height: 1.5715;
+  list-style: none;
+  -webkit-font-feature-settings: "tnum";
+  font-feature-settings: "tnum";
+  position: relative;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 8px 15px;
+  word-wrap: break-word;
+  border-radius: 2px;
+}
+
+#loading {
+  background-color: #e6f7ff;
+  border: 1px solid #91d5ff;
+}
+
+#error {
+  background-color: #fff2f0;
+  border: 1px solid #ffccc7;
+}
+
+#success {
+  background-color: #f6ffed;
+  border: 1px solid #b7eb8f;
+}
+
+#root.success .success,
+#root.loading .loading,
+#root.error .error {
+  display: block;
+}
+</style>
+</head>
+<body>
+<div id="root">
+  <div class="loading" id="loading">loading...</div>
+  <div class="error" id="error">Error info</div>
+  <div class="success" id="success">Success Info</div>
+  <div id="order">
+    <div style="display: none;">
+      Gate choice:
+      <label><input name="gate" type="radio" checked value="mastercard" /> MasterCard </label>
+      <label><input name="gate" type="radio" value="stcpay" /> STC Pay </label>
+      <label><input name="gate" type="radio" value="wireTransfer" /> Wire transfer </label>
+    </div>
+    <div>
+      <label>Comment: <input id="name" type="string" value="Order description " /></label>
+    </div>
+    <div>
+      <label>Currency: <select id="currency"><option value="SAR">SAR</option></select></label>
+    </div>
+    <div>
+      <label>Amount: <input id="amount" type="number" value="10" min="1" max="99999999999" /></label>
+    </div>
+    <div>
+      <label>Merchant name: <input id="merchantName" type="string" /> Optional</label>
+    </div>
+    <div>
+      <label>Address line1: <input id="addressL1" type="string" /> Optional</label>
+    </div>
+    <div>
+      <label>Address line2: <input id="addressL2" type="string" /> Optional</label>
+    </div>
+    <p><button id="paymentBtn">Payment</button></p>
+  </div>
+</div>
+<!-- MAIN_SCRIPT -->
+</body>
+</html>
