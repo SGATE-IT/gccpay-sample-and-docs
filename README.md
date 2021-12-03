@@ -105,30 +105,6 @@
     method: 'user.addOrder' 不同接口这个值不一样，创建订单: user.addOrder, 订单详情: order.detail
   </pre>
 
-## STCPay 支付相关补充文档
-<pre>支付流程(STCPay 支付无须跳转到 club.sgate.sa 支付页面)</pre>
-* 调用接口创建支付订单
-* 通过页面收集用户的支付短信验证码
-* 调用订单完成接口，验证短信验证码
-  * 成功 则支付完成
-  * 失败 提示用户验证码错误
-
-<pre> STCPay 支付用户输入支付短信验证码的必须在 5 分钟之内，超时需要重新创建支付订单</pre>
-
-<pre>STCPay 支付短信验证码确认接口</pre>
-* [PUT/PATCH] /orders/:orderId/complete 对接商户请求订单已支付完成验证
-  * 接口请求参数 body schema 定义, 参考 附录3
-  * 接口返回订单详情，参考 附录1
-
-## wireTransfer 支付相关补充文档
-<pre>支付流程(wireTransfer 支付必须跳转到 https://club.sgate.sa/wire-transfer/ 支付页面)</pre>
-* https://club.sgate.sa/wire-transfer/ 支付页面
-  * 参数 `orderId` 必填，支付网关创建订单返回的 `id`
-  * 参数 `ticket` 必填, 支付网关创建订单返回的 `ticket`
-  * 参数 `method` 选填, 页面方式 可选 `lightbox` or `paymentPage` 分别代表轻量级本页支付弹层以及全新页面支付
-  * 参数 `returnURL` 选填，支付完成后返回页面url, 不传则无法跳回, 返回页面会额外携带三个参数 orderId, ticket, action, action: `complete` 支付成功，`error` 支付失败，`cancel` 支付取消, `contact` 显示商户的客服联系人页面
-
-
 ## 附录1
 * 订单详情 schema 定义
 <pre>
