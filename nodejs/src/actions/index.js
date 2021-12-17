@@ -9,9 +9,6 @@ function Actions(cnf, deps) {
   const $currency = document.getElementById("currency");
   const $btn = document.getElementById("paymentBtn");
   const $gates = document.getElementsByName("gate");
-  const $merchantName = document.getElementById("merchantName");
-  const $addressL1 = document.getElementById("addressL1");
-  const $addressL2 = document.getElementById("addressL2");
 
   $name.value += Math.random().toString(36).slice(2);
 
@@ -35,10 +32,6 @@ function Actions(cnf, deps) {
       const adds = utils.orderURLs(location, order.id);
       adds.orderId = order.gateOrderId;
       adds.ticket = order.gateTicket;
-      if ($merchantName.value.trim())
-        adds.merchantName = $merchantName.value.trim();
-      if ($addressL1.value.trim()) adds.addressL1 = $addressL1.value.trim();
-      if ($addressL2.value.trim()) adds.addressL2 = $addressL2.value.trim();
       target = utils.modifiyURL(PAYMENT_ROOT, adds);
     }
 
