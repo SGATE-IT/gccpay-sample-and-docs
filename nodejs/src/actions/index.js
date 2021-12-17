@@ -31,7 +31,7 @@ function Actions(cnf, deps) {
     );
 
     let target;
-    if (gate === "mastercard") {
+    if (gate === "mastercardHosted") {
       const adds = utils.orderURLs(location, order.id);
       adds.orderId = order.gateOrderId;
       adds.ticket = order.gateTicket;
