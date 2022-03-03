@@ -6,6 +6,7 @@ function Actions(cnf, deps) {
 
   const $name = document.getElementById("name");
   const $amount = document.getElementById("amount");
+  const $mobile = document.getElementById("mobile");
   const $currency = document.getElementById("currency");
   const $btn = document.getElementById("paymentBtn");
   const $gates = document.getElementsByName("gate");
@@ -23,7 +24,7 @@ function Actions(cnf, deps) {
       $name.value,
       $amount.value | 0,
       $currency.value,
-      "",
+      $mobile.value,
       gate
     );
 

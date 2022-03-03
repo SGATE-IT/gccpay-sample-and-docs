@@ -55,11 +55,10 @@
   <div class="error" id="error">Error info</div>
   <div class="success" id="success">Success Info</div>
   <div id="order">
-    <div style="display: none;">
+    <div> 
       Gate choice:
       <label><input name="gate" type="radio" checked value="mastercardHosted" /> MasterCard </label>
       <label><input name="gate" type="radio" value="stcpay" /> STC Pay </label>
-      <label><input name="gate" type="radio" value="wireTransfer" /> Wire transfer </label>
     </div>
     <div>
       <label>Comment: <input id="name" type="string" value="Order description " /></label>
@@ -69,6 +68,9 @@
     </div>
     <div>
       <label>Amount: <input id="amount" type="number" value="10" min="1" max="99999999999" /></label>
+    </div>
+    <div>
+      <label>Mobile : <input id="mobile" type="string" /> Required when STC Pay</label>
     </div>
     <p><button id="paymentBtn">Payment</button></p>
   </div>

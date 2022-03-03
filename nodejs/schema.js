@@ -24,7 +24,7 @@ module.exports = {
     gate: {
       description: "支付网关选择",
       type: "string",
-      enum: ["mastercardHosted"],
+      enum: ["mastercardHosted", "stcpay"],
     },
     currency: {
       description: "订单金额币种",
