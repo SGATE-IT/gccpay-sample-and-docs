@@ -6,35 +6,22 @@ function Actions(cnf, deps) {
 
   const $name = document.getElementById("name");
   const $amount = document.getElementById("amount");
-  const $mobile = document.getElementById("mobile");
   const $currency = document.getElementById("currency");
   const $btn = document.getElementById("paymentBtn");
-  const $gates = document.getElementsByName("gate");
 
   $name.value += Math.random().toString(36).slice(2);
 
-  const getGate = () => {
-    const el = [].find.call($gates, (x) => x.checked);
-    return el && el.value;
-  };
-
   const addOrder = async () => {
-    const gate = getGate();
     const order = await utils.addOrder(
       $name.value,
       $amount.value | 0,
-      $currency.value,
-      $mobile.value,
-      gate
+      $currency.value
     );
 
-    let target;
-    if (gate === "mastercardHosted") {
-      const adds = utils.orderURLs(location, order.id);
-      adds.orderId = order.gateOrderId;
-      adds.ticket = order.gateTicket;
-      target = utils.modifiyURL(PAYMENT_ROOT, adds);
-    }
+    const adds = utils.orderURLs(location, order.id);
+    adds.orderId = order.gateOrderId;
+    adds.ticket = order.gateTicket;
+    const target = utils.modifiyURL(PAYMENT_ROOT, adds);
 
     return [order, target];
   };

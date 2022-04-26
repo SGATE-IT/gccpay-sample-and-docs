@@ -28,8 +28,20 @@ const axiosError = (e) => {
   return [d.code || r.status, d.message || d, JSON.stringify(d.data)];
 };
 
-axios.post = logger.logger(axios.post, "axios.post", true, (res) => res.data, axiosError);
-axios.get = logger.logger(axios.get, "axios.get", true, (res) => res.data, axiosError);
+axios.post = logger.logger(
+  axios.post,
+  "axios.post",
+  true,
+  (res) => res.data,
+  axiosError
+);
+axios.get = logger.logger(
+  axios.get,
+  "axios.get",
+  true,
+  (res) => res.data,
+  axiosError
+);
 
 const orderDict = {};
 for (const x of orders) orderDict[x.id] = x;
@@ -99,7 +111,11 @@ server.put("/orders/:gateOrderId/stcpay/status/paid", async (req, res) => {
 
   const order = orders.find((x) => x.gateOrderId === gateOrderId);
   if (order) {
-    const { status } = await sdk.stcPayConfirm(order.gateOrderId, order.gateTicket, value);
+    const { status } = await sdk.stcPayConfirm(
+      order.gateOrderId,
+      order.gateTicket,
+      value
+    );
     if (status === "paid") {
       order.status = "paid";
       order.updatedAt = Date.now();
@@ -172,6 +188,6 @@ server.post("/orders", async (req, res) => {
   }
 });
 
-server.listen(19999, () => {
+server.listen(29999, () => {
   console.log("%s listening at %s", server.name, server.url);
 });
