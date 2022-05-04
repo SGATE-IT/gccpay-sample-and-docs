@@ -1,72 +1,283 @@
 <html>
-<head>
-<title>Sgate.sa Payment case & sample</title>
-<style>
-#root {
-}
+  <head>
+    <title>Sgate.sa Payment case & sample</title>
+    <style>
+      *:where(:not(html, iframe, canvas, img, svg, video):not(svg *, symbol
+            *)) {
+        all: unset;
+        display: revert;
+      }
 
-#root .loading,
-#root .error,
-#root .success {
-  display: none;
-  box-sizing: border-box;
-  margin: 0;
-  color: rgba(0,0,0,.85);
-  font-size: 14px;
-  font-variant: tabular-nums;
-  line-height: 1.5715;
-  list-style: none;
-  -webkit-font-feature-settings: "tnum";
-  font-feature-settings: "tnum";
-  position: relative;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  padding: 8px 15px;
-  word-wrap: break-word;
-  border-radius: 2px;
-}
+      /* Preferred box-sizing value */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
 
-#loading {
-  background-color: #e6f7ff;
-  border: 1px solid #91d5ff;
-}
+      /* Reapply the pointer cursor for anchor tags */
+      a,
+      button {
+        cursor: revert;
+      }
 
-#error {
-  background-color: #fff2f0;
-  border: 1px solid #ffccc7;
-}
+      /* Remove list styles (bullets/numbers) */
+      ol,
+      ul,
+      menu {
+        list-style: none;
+      }
 
-#success {
-  background-color: #f6ffed;
-  border: 1px solid #b7eb8f;
-}
+      /* For images to not be able to exceed their container */
+      img {
+        max-width: 100%;
+      }
 
-#root.success .success,
-#root.loading .loading,
-#root.error .error {
-  display: block;
-}
-</style>
-</head>
-<body>
-<div id="root">
-  <div class="loading" id="loading">loading...</div>
-  <div class="error" id="error">Error info</div>
-  <div class="success" id="success">Success Info</div>
-  <div id="order">
-    <div>
-      <label>Comment: <input id="name" type="string" value="Order description " /></label>
+      /* removes spacing between cells in tables */
+      table {
+        border-collapse: collapse;
+      }
+
+      /* revert the 'white-space' property for textarea elements on Safari */
+      textarea {
+        white-space: revert;
+      }
+
+      /* minimum style to allow to style meter element */
+      meter {
+        -webkit-appearance: revert;
+        appearance: revert;
+      }
+
+      /* reset default text opacity of input placeholder */
+      ::placeholder {
+        color: unset;
+      }
+
+      /* fix the feature of 'hidden' attribute.
+     display:revert; revert to element instead of attribute */
+      :where([hidden]) {
+        display: none;
+      }
+
+      /* revert for bug in Chromium browsers
+     - fix for the content editable attribute will work properly. */
+      :where([contenteditable]) {
+        -moz-user-modify: read-write;
+        -webkit-user-modify: read-write;
+        overflow-wrap: break-word;
+        -webkit-line-break: after-white-space;
+      }
+
+      /* apply back the draggable feature - exist only in Chromium and Safari */
+      :where([draggable='true']) {
+        -webkit-user-drag: element;
+      }
+    </style>
+    <style>
+      html,
+      body,
+      #root {
+        height: 100%;
+      }
+
+      body {
+        font-family: 'Roboto', sans-serif !important;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        background-image: url('https://images.unsplash.com/photo-1586596436603-cb5e2445b06d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80');
+      }
+
+      #root {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #order {
+        width: 960px;
+        border-radius: 30px;
+        overflow: hidden;
+        display: flex;
+        color: #963e7b;
+      }
+
+      #order .order-content-wrap {
+        background-color: #fff;
+        width: 600;
+        padding: 20px;
+      }
+
+      #order .order-image-wrap {
+        background-color: #000;
+        width: 360px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #order .order-image-wrap img {
+        width: 300px;
+      }
+
+      #order .form-label {
+        display: block;
+        font-size: 16px;
+      }
+
+      #order .button {
+        width: 100%;
+        padding: 15px;
+        background: linear-gradient(135deg, #ac4835 0%, #eb8648 100%);
+        border: none;
+        border-radius: 50px;
+        color: white;
+        font-weight: 400;
+        font-size: 20px;
+        letter-spacing: 1px;
+        outline: none;
+        text-align: center;
+      }
+
+      #order .button:hover {
+        transform: scale(1.05) translateY(-3px);
+        box-shadow: 3px 3px 6px #38373785;
+      }
+
+      #order .input-text {
+        height: 42.5px;
+        padding: 3px;
+        border: none;
+        border-bottom: 1.5px solid #ccc;
+        border-radius: 5px;
+        font-family: 'Roboto', sans-serif;
+        color: #615a5a;
+        font-size: 18px;
+        font-weight: 500;
+        outline: none;
+      }
+
+      #order .full-width-input {
+        width: 100%;
+      }
+
+      #root .loading,
+      #root .error,
+      #root .success {
+        display: none;
+        box-sizing: border-box;
+        margin: 0;
+        color: rgba(0, 0, 0, 0.85);
+        font-size: 14px;
+        font-variant: tabular-nums;
+        line-height: 1.5715;
+        list-style: none;
+        -webkit-font-feature-settings: 'tnum';
+        font-feature-settings: 'tnum';
+        position: relative;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        padding: 8px 15px;
+        word-wrap: break-word;
+        border-radius: 2px;
+      }
+
+      #loading {
+        background-color: #e6f7ff;
+        border: 1px solid #91d5ff;
+      }
+
+      #error {
+        background-color: #fff2f0;
+        border: 1px solid #ffccc7;
+      }
+
+      #success {
+        background-color: #f6ffed;
+        border: 1px solid #b7eb8f;
+      }
+
+      #root.success .success,
+      #root.loading .loading,
+      #root.error .error {
+        display: block;
+      }
+      @media screen and (max-width: 1000px) {
+        body {
+          padding: 20px;
+        }
+        #order {
+          max-width: 335px;
+          flex-direction: column;
+          border-radius: 0px;
+        }
+        #order .order-content-wrap {
+          width: 100%;
+        }
+        #order .order-image-wrap {
+          width: 100%;
+          padding: 20px;
+        }
+        #order .order-image-wrap img {
+          height: 200px;
+          width: auto;
+        }
+        .button {
+          font-size: 18px;
+          padding: 10px;
+        }
+        .input-text {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root">
+      <div class="loading" id="loading">loading...</div>
+      <div class="error" id="error">Error info</div>
+      <div class="success" id="success">Success Info</div>
+      <div id="order">
+        <div class="order-image-wrap">
+          <img
+            src="https://mystartupworld.com/wp-content/uploads/2017/02/Payfort.jpg"
+            alt=""
+          />
+        </div>
+        <div class="order-content-wrap">
+          <label class="form-label">
+            Comment:
+            <input
+              class="input-text full-width-input"
+              id="name"
+              type="string"
+              value="Order description "
+            />
+          </label>
+          <label class="form-label" style="margin-top: 20px">
+            Currency:
+            <select class="input-text full-width-input" id="currency">
+              <option value="SAR">SAR</option>
+            </select>
+          </label>
+          <label class="form-label" style="margin-top: 20px">
+            Amount:
+            <input
+              class="input-text full-width-input"
+              id="amount"
+              type="number"
+              value="10"
+              min="1"
+              max="99999999999"
+            />
+          </label>
+          <div style="margin-top: 20px">
+            <button class="button" id="paymentBtn">Payment</button>
+          </div>
+        </div>
+      </div>
     </div>
-    <div>
-      <label>Currency: <select id="currency"><option value="SAR">SAR</option></select></label>
-    </div>
-    <div>
-      <label>Amount: <input id="amount" type="number" value="10" min="1" max="99999999999" /></label>
-    </div>
-    <p><button id="paymentBtn">Payment</button></p>
-  </div>
-</div>
-<!-- MAIN_SCRIPT -->
-</body>
+  </body>
 </html>
