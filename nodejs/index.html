@@ -203,6 +203,7 @@
       #root.loading .loading,
       #root.error .error {
         display: block;
+        margin-top: 20px;
       }
       @media screen and (max-width: 1000px) {
         body {
@@ -236,9 +237,6 @@
   </head>
   <body>
     <div id="root">
-      <div class="loading" id="loading">loading...</div>
-      <div class="error" id="error">Error info</div>
-      <div class="success" id="success">Success Info</div>
       <div id="order">
         <div class="order-image-wrap">
           <img
@@ -273,6 +271,11 @@
               max="99999999999"
             />
           </label>
+          <div>
+            <div class="loading" id="loading">loading...</div>
+            <div class="error" id="error">Error info</div>
+            <div class="success" id="success">Success Info</div>
+          </div>
           <div style="margin-top: 20px">
             <button class="button" id="paymentBtn">Payment</button>
           </div>
